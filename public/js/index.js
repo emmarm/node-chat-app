@@ -10,18 +10,20 @@ socket.on('disconnect', () => {
 
 socket.on('newMessage', (message) => {
   const messageList = document.querySelector('#messages');
+  const formattedTime = moment(message.createdAt).format('h:mm a');
   const listItem = document.createElement('li');
-  listItem.innerText = `${message.from}: ${message.text}`;
+  listItem.innerText = `${message.from} ${formattedTime}: ${message.text}`;
 
   messageList.appendChild(listItem);
 });
 
 socket.on('newLocationMessage', (message) => {
   const messageList = document.querySelector('#messages');
+  const formattedTime = moment(message.createdAt).format('h:mm a');
   const li = document.createElement('li');
   const a = document.createElement('a');
 
-  li.innerText = `${message.from}: `;
+  li.innerText = `${message.from} ${formattedTime}: `;
   a.innerText = 'My current location';
   a.setAttribute('href', message.url);
   a.setAttribute('target', '_blank');
